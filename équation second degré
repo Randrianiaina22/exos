@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résolution d'une équation du second degré</title>
+</head>
+<body>
+    <form method="post" action="">
+        <label for="a">Coefficient a :</label>
+        <input type="number" name="a" required>
+
+        <label for="b">Coefficient b :</label>
+        <input type="number" name="b" required>
+
+        <label for="c">Coefficient c :</label>
+        <input type="number" name="c" required>
+
+        <input type="submit" value="Résoudre" name="solve">
+    </form>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["solve"])) {
+        [$a, $b, $c] = [$_POST["a"], $_POST["b"], $_POST["c"]];
+        $delta = $b**2 - 4 * $a * $c;
+
+        if ($delta > 0)
+            echo "<p>Racines : " . (-$b + sqrt($delta)) / (2 * $a) . " et " . (-$b - sqrt($delta)) / (2 * $a) . ".</p>";
+        elseif ($delta == 0)
+            echo "<p>Racine double : " . -$b / (2 * $a) . ".</p>";
+        else
+            echo "<p>Pas de racines réelles.</p>";
+    }
+    ?>
+</body>
+</html>
